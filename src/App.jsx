@@ -1,6 +1,7 @@
 import './App.css'
 import Main from './componets/Main/Main'
 import Navbar  from './componets/Navbar/Navbar'
+import { ToastContainer } from 'react-toastify';
 function App() {
   
 
@@ -8,6 +9,7 @@ function App() {
     <>
      <Navbar/> 
      <Main/>
+     <ToastContainer position='top-center' />
     </>
   )
 }

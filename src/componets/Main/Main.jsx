@@ -1,28 +1,40 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Todo from '../Todo/Todo'
+import { toast } from 'react-toastify'
+
 
 const Main = () => {
     const [todo, setTodo] = useState("")
     const [todos, setTodos] = useState([])
     useEffect(() => {
-      let todosString = JSON.parse(localStorage.getItem('todos'));
-     if(todosString){
-        setTodos(todosString)
-     }
+        let todosString = JSON.parse(localStorage.getItem('todos'));
+        if (todosString) {
+            setTodos(todosString)
+        }
     }, [])
-    
-    const setToLS=()=>{
-        console.log(todos)
-        let todosJS =JSON.stringify(todos) 
-        localStorage.setItem("todos",todosJS)
+
+    const getFromLS = () => {
+        const todosString = localStorage.getItem('todos')
+        if (todosString) {
+            const todosArr = JSON.parse(todosString)
+            return todosArr
+        }
+        return []
     }
-    const handleSave =()=>{
-        todo &&  setTodos([...todos,todo])
-        console.log(todos)
+
+    const addToLS = (todo) => {
+        const todosArr = getFromLS()
+        const newTodosArr =[...todosArr,todo]
+        localStorage.setItem("todos",JSON.stringify(newTodosArr))
+    }
+    const handleSave = () => {
+        todo && setTodos([...todos, todo])
+        console.log(todo)
         setTodo('')
-        setToLS()
+        addToLS(todo)
+        toast.success("Your Todo Is Added")
     }
-    const handelChange =(e)=>{
+    const handelChange = (e) => {
         setTodo(e.target.value)
     }
     return (
@@ -38,9 +50,9 @@ const Main = () => {
                 <div className='title mt-5'>
                     <h1 className='text-2xl font-bold'>Your Todos</h1>
                 </div>
-               {
-                todos.map((item,index)=><Todo key={index} item ={item} id={index} todo={[todo,setTodo]} todos={[todos,setTodos]} setToLS={setToLS} />)
-               }
+                {
+                    todos.map((item, index) => <Todo key={index} item={item} id={index} todo={[todo, setTodo]} todos={[todos, setTodos]} addToLS={addToLS} />)
+                }
             </div>
         </div>
     )

@@ -1,9 +1,13 @@
 import React from 'react'
+import { toast } from 'react-toastify';
 
-const Todo = ({item,id,todos,todo,setToLS}) => {
+
+const Todo = ({item,id,todos,todo}) => {
     const handleDelete =(id)=>{
         let filterTodos = todos[0].filter((_,index)=>index!==id)
         todos[1](filterTodos);
+       localStorage.setItem("todos",JSON.stringify(filterTodos)) 
+       toast.error("Your Todo Is Deleted")
         
     }
     const handleEdit =(id)=>{
@@ -13,7 +17,7 @@ const Todo = ({item,id,todos,todo,setToLS}) => {
         // delete value
         let filterTodos = todos[0].filter((_,index)=>index!==id)
         todos[1](filterTodos);
-        setToLS()
+       localStorage.setItem("todos",JSON.stringify(filterTodos))
     }
     return (
         <div className='todo flex justify-between w-1/4 items-center'>

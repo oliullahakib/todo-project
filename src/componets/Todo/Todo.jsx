@@ -20,7 +20,7 @@ const Todo = ({item,id,todos,todo}) => {
        localStorage.setItem("todos",JSON.stringify(filterTodos))
     }
     return (
-        <div className='todo flex justify-between w-1/4 items-center'>
+        <div className='todo flex justify-between w-full md:w-1/4 items-center'>
             <div id={id} className='flex items-center gap-1'>
                 <input type="checkbox" className="checkbox checkbox-sm bg-black text-white" />
                 <p>{item}</p>

@@ -43,7 +43,7 @@ const Main = () => {
                 <h1 className='text-2xl font-bold'>Add a Todo</h1>
                 <div >
                     <input type="text" value={todo} onChange={handelChange} className="input text-white" />
-                    <button onClick={handleSave} className='btn btn-primary ml-3'>Save</button>
+                    <button onClick={handleSave} className='btn btn-primary md:ml-3 mt-2 sm:mt-0'>Save</button>
                 </div>
             </div>
             <div className='todo-container space-y-3'>
